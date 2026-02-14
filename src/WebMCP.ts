@@ -87,7 +87,14 @@ export function registerWebMCPTools() {
         execute: () => {
             showAlert("display_cart called");
             storeManager.setCartOpen(true);
-            return "Shopping cart is now visible";
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: "The shopping cart has been opened and is now visible to the user."
+                    }
+                ]
+            };
         }
     });
 
