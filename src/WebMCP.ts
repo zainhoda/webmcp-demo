@@ -85,6 +85,7 @@ export function registerWebMCPTools() {
             properties: {},
         },
         execute: () => {
+            console.log("display_cart called");
             showAlert("display_cart called");
             storeManager.setCartOpen(true);
             return {
