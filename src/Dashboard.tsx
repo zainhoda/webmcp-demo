@@ -17,6 +17,7 @@ import {
   Cell,
   ResponsiveContainer,
 } from 'recharts';
+import { motion } from 'framer-motion';
 import './App.css';
 
 export function Dashboard() {
@@ -36,89 +37,226 @@ export function Dashboard() {
   return (
     <div className="app dashboard">
       {/* Header */}
-      <header className="header">
+      <motion.header 
+        className="header"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="header-content">
-          <h1 className="logo">📊 Analytics Dashboard</h1>
-          <div className="period-selector">
-            <button
+          <motion.h1 
+            className="logo"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5, type: 'spring', stiffness: 200 }}
+          >
+            📊 Analytics Dashboard
+          </motion.h1>
+          <motion.div 
+            className="period-selector"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <motion.button
               className={selectedPeriod === 'monthly' ? 'active' : ''}
               onClick={() => dashboardManager.setSelectedPeriod('monthly')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Monthly
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className={selectedPeriod === 'quarterly' ? 'active' : ''}
               onClick={() => dashboardManager.setSelectedPeriod('quarterly')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Quarterly
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className={selectedPeriod === 'yearly' ? 'active' : ''}
               onClick={() => dashboardManager.setSelectedPeriod('yearly')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Yearly
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Metrics Cards */}
-      <div className="metrics-container">
-        <div
+      <motion.div 
+        className="metrics-container"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.1,
+              delayChildren: 0.3
+            }
+          }
+        }}
+      >
+        <motion.div
           className={`metric-card ${highlightedMetric === 'revenue' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('revenue')}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.03, y: -8 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
-          <div className="metric-icon">💰</div>
+          <motion.div 
+            className="metric-icon"
+            initial={{ rotate: -180, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+          >
+            💰
+          </motion.div>
           <div className="metric-content">
             <div className="metric-label">Total Revenue</div>
-            <div className="metric-value">${metrics.totalRevenue.toLocaleString()}</div>
+            <motion.div 
+              className="metric-value"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
+            >
+              ${metrics.totalRevenue.toLocaleString()}
+            </motion.div>
             <div className="metric-trend positive">↑ {metrics.growthRate}%</div>
           </div>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           className={`metric-card ${highlightedMetric === 'sales' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('sales')}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.03, y: -8 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
-          <div className="metric-icon">🛍️</div>
+          <motion.div 
+            className="metric-icon"
+            initial={{ rotate: -180, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
+          >
+            🛍️
+          </motion.div>
           <div className="metric-content">
             <div className="metric-label">Total Sales</div>
-            <div className="metric-value">{metrics.totalSales.toLocaleString()}</div>
+            <motion.div 
+              className="metric-value"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
+            >
+              {metrics.totalSales.toLocaleString()}
+            </motion.div>
             <div className="metric-trend positive">↑ 8.2%</div>
           </div>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           className={`metric-card ${highlightedMetric === 'customers' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('customers')}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.03, y: -8 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
-          <div className="metric-icon">👥</div>
+          <motion.div 
+            className="metric-icon"
+            initial={{ rotate: -180, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
+          >
+            👥
+          </motion.div>
           <div className="metric-content">
             <div className="metric-label">Total Customers</div>
-            <div className="metric-value">{metrics.totalCustomers.toLocaleString()}</div>
+            <motion.div 
+              className="metric-value"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.8, type: 'spring', stiffness: 200 }}
+            >
+              {metrics.totalCustomers.toLocaleString()}
+            </motion.div>
             <div className="metric-trend positive">↑ 15.3%</div>
           </div>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           className={`metric-card ${highlightedMetric === 'aov' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('aov')}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.03, y: -8 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
-          <div className="metric-icon">📈</div>
+          <motion.div 
+            className="metric-icon"
+            initial={{ rotate: -180, scale: 0 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ delay: 0.8, type: 'spring', stiffness: 200 }}
+          >
+            📈
+          </motion.div>
           <div className="metric-content">
             <div className="metric-label">Avg Order Value</div>
-            <div className="metric-value">${metrics.averageOrderValue.toFixed(2)}</div>
+            <motion.div 
+              className="metric-value"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.9, type: 'spring', stiffness: 200 }}
+            >
+              ${metrics.averageOrderValue.toFixed(2)}
+            </motion.div>
             <div className="metric-trend positive">↑ 4.1%</div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Charts Grid */}
-      <div className="charts-container">
+      <motion.div 
+        className="charts-container"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.15,
+              delayChildren: 0.8
+            }
+          }
+        }}
+      >
         {/* Sales & Revenue Chart */}
-        <div
+        <motion.div
           className={`chart-card large ${selectedChart === 'sales' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('sales')}
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
           <h3>Sales & Revenue Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -152,12 +290,18 @@ export function Dashboard() {
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
         {/* Product Categories Chart */}
-        <div
+        <motion.div
           className={`chart-card ${selectedChart === 'categories' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('categories')}
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
           <h3>Product Categories</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -179,12 +323,18 @@ export function Dashboard() {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
         {/* Regional Sales Chart */}
-        <div
+        <motion.div
           className={`chart-card ${selectedChart === 'regional' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('regional')}
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
           <h3>Regional Sales</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -202,12 +352,18 @@ export function Dashboard() {
               <Bar dataKey="sales" fill="#764ba2" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
         {/* Daily Traffic Chart */}
-        <div
+        <motion.div
           className={`chart-card large ${selectedChart === 'traffic' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('traffic')}
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
           <h3>Daily Website Traffic</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -241,10 +397,18 @@ export function Dashboard() {
               />
             </AreaChart>
           </ResponsiveContainer>
-        </div>
+        </motion.div>
 
         {/* Customer Growth Chart */}
-        <div className="chart-card">
+        <motion.div 
+          className="chart-card"
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0 }
+          }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        >
           <h3>Customer Growth</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={monthlySales}>
@@ -267,8 +431,8 @@ export function Dashboard() {
               />
             </AreaChart>
           </ResponsiveContainer>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
