@@ -107,6 +107,7 @@ export function Dashboard() {
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
           }}
+          animate={{ y: highlightedMetric === 'revenue' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -140,6 +141,7 @@ export function Dashboard() {
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
           }}
+          animate={{ y: highlightedMetric === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -173,6 +175,7 @@ export function Dashboard() {
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
           }}
+          animate={{ y: highlightedMetric === 'customers' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -206,6 +209,7 @@ export function Dashboard() {
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
           }}
+          animate={{ y: highlightedMetric === 'aov' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -255,6 +259,7 @@ export function Dashboard() {
             hidden: { opacity: 0, scale: 0.8, y: 20 },
             visible: { opacity: 1, scale: 1, y: 0 }
           }}
+          animate={{ y: selectedChart === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
@@ -300,6 +305,7 @@ export function Dashboard() {
             hidden: { opacity: 0, scale: 0.8, y: 20 },
             visible: { opacity: 1, scale: 1, y: 0 }
           }}
+          animate={{ y: selectedChart === 'categories' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
@@ -333,6 +339,7 @@ export function Dashboard() {
             hidden: { opacity: 0, scale: 0.8, y: 20 },
             visible: { opacity: 1, scale: 1, y: 0 }
           }}
+          animate={{ y: selectedChart === 'regional' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
@@ -362,6 +369,7 @@ export function Dashboard() {
             hidden: { opacity: 0, scale: 0.8, y: 20 },
             visible: { opacity: 1, scale: 1, y: 0 }
           }}
+          animate={{ y: selectedChart === 'traffic' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >

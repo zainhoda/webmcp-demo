@@ -113,7 +113,6 @@ body {
 .metric-card.highlighted {
     border-color: #667eea;
     box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
-    transform: translateY(-4px);
 }
 
 .metric-icon {
@@ -179,7 +178,6 @@ body {
 .chart-card.highlighted {
     border-color: #667eea;
     box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
-    transform: translateY(-4px);
 }
 
 .chart-card.large {
