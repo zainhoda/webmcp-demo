@@ -20,6 +20,21 @@ import {
 import { motion } from 'framer-motion';
 import './App.css';
 
+// Animation variants
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const cardTransition = { type: 'spring' as const, stiffness: 300, damping: 20 };
+
+const chartCardVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  visible: { opacity: 1, scale: 1, y: 0 }
+};
+
+const chartCardTransition = { type: 'spring' as const, stiffness: 200, damping: 20 };
+
 export function Dashboard() {
   const state = useSyncExternalStore(
     (l) => dashboardManager.subscribe(l),
@@ -103,14 +118,11 @@ export function Dashboard() {
         <motion.div
           className={`metric-card ${highlightedMetric === 'revenue' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('revenue')}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
-          }}
+          variants={cardVariants}
           animate={{ y: highlightedMetric === 'revenue' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          transition={cardTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -137,14 +149,11 @@ export function Dashboard() {
         <motion.div
           className={`metric-card ${highlightedMetric === 'sales' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('sales')}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
-          }}
+          variants={cardVariants}
           animate={{ y: highlightedMetric === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          transition={cardTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -171,14 +180,11 @@ export function Dashboard() {
         <motion.div
           className={`metric-card ${highlightedMetric === 'customers' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('customers')}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
-          }}
+          variants={cardVariants}
           animate={{ y: highlightedMetric === 'customers' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          transition={cardTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -205,14 +211,11 @@ export function Dashboard() {
         <motion.div
           className={`metric-card ${highlightedMetric === 'aov' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setHighlightedMetric('aov')}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
-          }}
+          variants={cardVariants}
           animate={{ y: highlightedMetric === 'aov' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          transition={cardTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -255,13 +258,10 @@ export function Dashboard() {
         <motion.div
           className={`chart-card large ${selectedChart === 'sales' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('sales')}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0 }
-          }}
+          variants={chartCardVariants}
           animate={{ y: selectedChart === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          transition={chartCardTransition}
         >
           <h3>Sales & Revenue Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -301,13 +301,10 @@ export function Dashboard() {
         <motion.div
           className={`chart-card ${selectedChart === 'categories' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('categories')}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0 }
-          }}
+          variants={chartCardVariants}
           animate={{ y: selectedChart === 'categories' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          transition={chartCardTransition}
         >
           <h3>Product Categories</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -335,13 +332,10 @@ export function Dashboard() {
         <motion.div
           className={`chart-card ${selectedChart === 'regional' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('regional')}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0 }
-          }}
+          variants={chartCardVariants}
           animate={{ y: selectedChart === 'regional' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          transition={chartCardTransition}
         >
           <h3>Regional Sales</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -365,13 +359,10 @@ export function Dashboard() {
         <motion.div
           className={`chart-card large ${selectedChart === 'traffic' ? 'highlighted' : ''}`}
           onClick={() => dashboardManager.setSelectedChart('traffic')}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0 }
-          }}
+          variants={chartCardVariants}
           animate={{ y: selectedChart === 'traffic' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          transition={chartCardTransition}
         >
           <h3>Daily Website Traffic</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -410,12 +401,9 @@ export function Dashboard() {
         {/* Customer Growth Chart */}
         <motion.div 
           className="chart-card"
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0 }
-          }}
+          variants={chartCardVariants}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          transition={chartCardTransition}
         >
           <h3>Customer Growth</h3>
           <ResponsiveContainer width="100%" height={300}>
