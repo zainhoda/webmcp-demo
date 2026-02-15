@@ -1,4 +1,4 @@
-import { storeManager } from "./StoreManager";
+import { dashboardManager } from "./DashboardManager";
 import "./Notification.css";
 
 let notificationContainer: HTMLDivElement | null = null;
@@ -45,71 +45,126 @@ export function registerWebMCPTools() {
     }
 
     navigator.modelContext.registerTool({
-        name: "get_all_store_items",
-        description: "Get all available store items",
+        name: "get_dashboard_data",
+        description: "Get all dashboard data including sales, revenue, customers, categories, and regional information",
         inputSchema: {
             type: "object",
             properties: {},
         },
         execute: () => {
-            showAlert("get_all_store_items called")
-            return storeManager.getItems()
+            showAlert("get_dashboard_data called");
+            return dashboardManager.getAllDashboardData();
         }
     });
 
     navigator.modelContext.registerTool({
-        name: "add_to_cart",
-        description: "Add an item to the shopping cart",
+        name: "get_sales_data",
+        description: "Get sales and revenue data for a specific time period",
         inputSchema: {
             type: "object",
             properties: {
-                id: {
-                    type: "number",
-                    description: "The ID of the item to add to the cart"
+                period: {
+                    type: "string",
+                    enum: ["monthly", "quarterly", "yearly"],
+                    description: "The time period to retrieve sales data for"
                 }
             },
-            required: ["id"]
+            required: ["period"]
         },
-        execute: ({ id }: { id: number }) => {
-            showAlert("add_to_cart called")
-            storeManager.addToCart(id)
-            return `Successfully added item ${id} to cart`;
+        execute: ({ period }: { period: 'monthly' | 'quarterly' | 'yearly' }) => {
+            showAlert(`get_sales_data called for ${period} period`);
+            return dashboardManager.getFilteredSalesData(period);
         }
     });
 
     navigator.modelContext.registerTool({
-        name: "display_cart",
-        description: "Display the current shopping cart items to user",
+        name: "get_revenue_data",
+        description: "Get revenue metrics and statistics",
         inputSchema: {
             type: "object",
             properties: {},
         },
         execute: () => {
-            console.log("display_cart called");
-            showAlert("display_cart called");
-            storeManager.setCartOpen(true);
+            showAlert("get_revenue_data called");
+            const metrics = dashboardManager.getDashboardMetrics();
             return {
-                content: [
-                    {
-                        type: "text",
-                        text: "The shopping cart has been opened and is now visible to the user."
-                    }
-                ]
+                totalRevenue: metrics.totalRevenue,
+                averageOrderValue: metrics.averageOrderValue,
+                growthRate: metrics.growthRate,
             };
         }
     });
 
     navigator.modelContext.registerTool({
-        name: "purchase_cart",
-        description: "Purchase the current shopping cart items",
+        name: "visualize_data",
+        description: "Visualize specific chart on the dashboard by highlighting it",
         inputSchema: {
             type: "object",
-            properties: {},
+            properties: {
+                chartName: {
+                    type: "string",
+                    enum: ["sales", "categories", "regional", "traffic"],
+                    description: "The name of the chart to visualize and highlight"
+                }
+            },
+            required: ["chartName"]
         },
-        execute: () => {
-            showAlert("purchase_cart called");
-            storeManager.handleBuy();
-            return "Shopping cart purchased successfully";
+        execute: ({ chartName }: { chartName: string }) => {
+            showAlert(`visualize_data called for ${chartName} chart`);
+            dashboardManager.setSelectedChart(chartName);
+            const data = dashboardManager.getDataByChartName(chartName);
+            return {
+                message: `${chartName} chart has been highlighted and is now visible to the user`,
+                data: data
+            };
+        }
+    });
+
+    navigator.modelContext.registerTool({
+        name: "filter_data_by_period",
+        description: "Filter dashboard data by time period (monthly, quarterly, or yearly)",
+        inputSchema: {
+            type: "object",
+            properties: {
+                period: {
+                    type: "string",
+                    enum: ["monthly", "quarterly", "yearly"],
+                    description: "The time period to filter by"
+                }
+            },
+            required: ["period"]
+        },
+        execute: ({ period }: { period: 'monthly' | 'quarterly' | 'yearly' }) => {
+            showAlert(`filter_data_by_period called for ${period}`);
+            dashboardManager.setSelectedPeriod(period);
+            return {
+                message: `Dashboard filtered to show ${period} data`,
+                filteredData: dashboardManager.getFilteredSalesData(period)
+            };
+        }
+    });
+
+    navigator.modelContext.registerTool({
+        name: "highlight_metric",
+        description: "Highlight a specific metric card on the dashboard",
+        inputSchema: {
+            type: "object",
+            properties: {
+                metric: {
+                    type: "string",
+                    enum: ["revenue", "sales", "customers", "aov"],
+                    description: "The metric to highlight (revenue, sales, customers, or aov for average order value)"
+                }
+            },
+            required: ["metric"]
+        },
+        execute: ({ metric }: { metric: string }) => {
+            showAlert(`highlight_metric called for ${metric}`);
+            dashboardManager.setHighlightedMetric(metric);
+            return {
+                message: `${metric} metric has been highlighted`,
+                metrics: dashboardManager.getDashboardMetrics()
+            };
         }
     });
 }
