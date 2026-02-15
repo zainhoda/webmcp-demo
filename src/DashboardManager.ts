@@ -17,6 +17,8 @@ export interface DashboardState {
   selectedPeriod: 'monthly' | 'quarterly' | 'yearly';
   selectedChart: string | null;
   highlightedMetric: string | null;
+  modalChart: string | null;
+  modalMetric: string | null;
 }
 
 class DashboardManager {
@@ -24,6 +26,8 @@ class DashboardManager {
     selectedPeriod: 'monthly',
     selectedChart: null,
     highlightedMetric: null,
+    modalChart: null,
+    modalMetric: null,
   };
 
   private listeners: Set<() => void> = new Set();
@@ -115,6 +119,16 @@ class DashboardManager {
 
   setHighlightedMetric(metric: string | null) {
     this.state = { ...this.state, highlightedMetric: metric };
+    this.notify();
+  }
+
+  setModalChart(chartName: string | null) {
+    this.state = { ...this.state, modalChart: chartName };
+    this.notify();
+  }
+
+  setModalMetric(metric: string | null) {
+    this.state = { ...this.state, modalMetric: metric };
     this.notify();
   }
 
