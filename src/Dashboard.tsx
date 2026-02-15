@@ -20,20 +20,18 @@ import {
 import { motion } from 'framer-motion';
 import './App.css';
 
-// Animation variants
+// Animation variants and transitions
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 }
 };
-
-const cardTransition = { type: 'spring' as const, stiffness: 300, damping: 20 };
 
 const chartCardVariants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
   visible: { opacity: 1, scale: 1, y: 0 }
 };
 
-const chartCardTransition = { type: 'spring' as const, stiffness: 200, damping: 20 };
+const springTransition = { type: 'spring' as const, stiffness: 300, damping: 20 };
 
 export function Dashboard() {
   const state = useSyncExternalStore(
@@ -122,7 +120,7 @@ export function Dashboard() {
           animate={{ y: highlightedMetric === 'revenue' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={cardTransition}
+          transition={springTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -153,7 +151,7 @@ export function Dashboard() {
           animate={{ y: highlightedMetric === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={cardTransition}
+          transition={springTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -184,7 +182,7 @@ export function Dashboard() {
           animate={{ y: highlightedMetric === 'customers' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={cardTransition}
+          transition={springTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -215,7 +213,7 @@ export function Dashboard() {
           animate={{ y: highlightedMetric === 'aov' ? -4 : 0 }}
           whileHover={{ scale: 1.03, y: -8 }}
           whileTap={{ scale: 0.98 }}
-          transition={cardTransition}
+          transition={springTransition}
         >
           <motion.div 
             className="metric-icon"
@@ -261,7 +259,7 @@ export function Dashboard() {
           variants={chartCardVariants}
           animate={{ y: selectedChart === 'sales' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={chartCardTransition}
+          transition={springTransition}
         >
           <h3>Sales & Revenue Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -304,7 +302,7 @@ export function Dashboard() {
           variants={chartCardVariants}
           animate={{ y: selectedChart === 'categories' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={chartCardTransition}
+          transition={springTransition}
         >
           <h3>Product Categories</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -335,7 +333,7 @@ export function Dashboard() {
           variants={chartCardVariants}
           animate={{ y: selectedChart === 'regional' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={chartCardTransition}
+          transition={springTransition}
         >
           <h3>Regional Sales</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -362,7 +360,7 @@ export function Dashboard() {
           variants={chartCardVariants}
           animate={{ y: selectedChart === 'traffic' ? -4 : 0 }}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={chartCardTransition}
+          transition={springTransition}
         >
           <h3>Daily Website Traffic</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -403,7 +401,7 @@ export function Dashboard() {
           className="chart-card"
           variants={chartCardVariants}
           whileHover={{ scale: 1.02, y: -4 }}
-          transition={chartCardTransition}
+          transition={springTransition}
         >
           <h3>Customer Growth</h3>
           <ResponsiveContainer width="100%" height={300}>

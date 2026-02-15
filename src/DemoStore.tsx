@@ -131,7 +131,7 @@ export function DemoStore() {
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.03,
+                staggerChildren: 0.02,
                 delayChildren: 0.6
               }
             }
