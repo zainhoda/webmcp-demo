@@ -266,6 +266,54 @@ export function Dashboard() {
               Yearly
             </motion.button>
           </motion.div>
+          
+          {/* Test Modal Buttons - for development */}
+          <motion.div
+            style={{ 
+              display: 'flex', 
+              gap: '0.5rem', 
+              marginLeft: '1rem',
+              flexWrap: 'wrap'
+            }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            <motion.button
+              style={{
+                background: '#48bb78',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}
+              onClick={() => dashboardManager.setModalChart('sales')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Test Chart Modal
+            </motion.button>
+            <motion.button
+              style={{
+                background: '#f093fb',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}
+              onClick={() => dashboardManager.setModalMetric('revenue')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Test Metric Modal
+            </motion.button>
+          </motion.div>
         </div>
       </motion.header>
 
@@ -619,7 +667,6 @@ export function Dashboard() {
               exit={{ scale: 0.5, opacity: 0, y: 100 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               onClick={(e) => e.stopPropagation()}
-              layoutId={modalChart || modalMetric || undefined}
             >
               <motion.button
                 className="modal-close-button"
