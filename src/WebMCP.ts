@@ -112,9 +112,10 @@ export function registerWebMCPTools() {
         execute: ({ chartName }: { chartName: string }) => {
             showAlert(`visualize_data called for ${chartName} chart`);
             dashboardManager.setSelectedChart(chartName);
+            dashboardManager.setModalChart(chartName);
             const data = dashboardManager.getDataByChartName(chartName);
             return {
-                message: `${chartName} chart has been highlighted and is now visible to the user`,
+                message: `${chartName} chart has been highlighted and is now visible in a modal to the user`,
                 data: data
             };
         }
@@ -161,8 +162,9 @@ export function registerWebMCPTools() {
         execute: ({ metric }: { metric: string }) => {
             showAlert(`highlight_metric called for ${metric}`);
             dashboardManager.setHighlightedMetric(metric);
+            dashboardManager.setModalMetric(metric);
             return {
-                message: `${metric} metric has been highlighted`,
+                message: `${metric} metric has been highlighted and is now visible in a modal`,
                 metrics: dashboardManager.getDashboardMetrics()
             };
         }

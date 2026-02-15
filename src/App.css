@@ -689,3 +689,139 @@ body {
         width: 100vw;
     }
 }
+
+/* Chart Modal Styles */
+.chart-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 2rem;
+}
+
+.chart-modal-container {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 1200px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #f7fafc;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #718096;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.modal-close-button:hover {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+.modal-chart-content {
+    margin-top: 1rem;
+}
+
+.modal-chart-content h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Modal Metric Styles */
+.modal-metric-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    min-height: 300px;
+}
+
+.modal-metric-icon {
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.modal-metric-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #718096;
+    margin-bottom: 1rem;
+}
+
+.modal-metric-value {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.modal-metric-trend {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #48bb78;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .chart-modal-overlay {
+        padding: 1rem;
+    }
+
+    .chart-modal-container {
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+
+    .modal-metric-icon {
+        font-size: 4rem;
+    }
+
+    .modal-metric-value {
+        font-size: 2.5rem;
+    }
+
+    .modal-chart-content h3 {
+        font-size: 1.3rem;
+    }
+}
